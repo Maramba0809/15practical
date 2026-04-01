@@ -7,23 +7,22 @@ public class anagrams{
     public static String signature(String word){
     char[]letters=word.toCharArray();
      Arrays.sort(letters);
-    return new string(letters);
+    return new String(letters);
     }
     public static void main(String []args){
                                                 
-    String inputFile =("joyce1922_ulysses.text");
+    String inputFile ="joyce1922_ulysses.text";
     File file=new File(inputFile);
 
-     // check if file exisits 
-    if(!file.exisits()){
+     // check if file exists 
+    if(!file.exists()){
     System.out.println("ERROR:File not found ->" + inputFile);
     return; 
     }
 
     }  Map<String, Integer> wordCount = new TreeMap<>();
-
-        // Map storing anagram groups
-        Map<String, ArrayList<String>> anagramGroups = new TreeMap<>();
+ // Map storing anagram groups
+        Map<String, ArrayList> anagramGroups = new TreeMap<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
@@ -34,29 +33,29 @@ public class anagrams{
 
                 for (String w : words) {
                      // clean word but keep apostrophes
-                    String clean = w.replaceAll("^[^a-zA-Z']+", "");
+                    String clean = w.replaceAll("^[^a-zA-Z']+"+,"")";
                     clean = clean.replaceAll("[^a-zA-Z']+$", "");
-                    clean = clean.toLowerCase();String[] words = line.split("\\s+");
-
-                    for (String w : words) {
+                    clean = clean.toLowerCase();
+                    
 
                     if (clean.length() == 0) {
                         continue;
-                    }
 
-                    // update word count
-                    wordCount.put(clean, wordCount.getOrDefault(clean, 0) + 1);
-
-                }
+                        wordCount.put(clean, wordCount.getOrDefault(clean, 0) + 1);
+                        }
             }
-            } catch (IOException e) {
+            } catch (Exception e) {
             e.printStackTrace();
 
-        }List<String> lines = new ArrayList<>();
+        }
 
-        for (List<String> list : anagramGroups.values()) {
+        for (String word: wordCount.keySet()) {
+          String sig = signature(word);
+          if(!anagramGroups.containsKey(sig))
+           anagramGroups.put(sig, new ArrayList<>());
 
-            if (list.size() > 1) {
+           anagramGroups.get(sig)
+            if (list.size() {
 
                 Collections.sort(list);
                 String base = String.join(" ", list);
@@ -89,7 +88,9 @@ public class anagrams{
             Sytem.out.println("Output file: latex/theAnagrams.tex");
 
         }catch (Exception e){
-            e.printStackTrace();
+            e.printStackTrace(); 
+
+        }
         }
         }
 }
